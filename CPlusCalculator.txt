@@ -1,0 +1,117 @@
+#include <iostream>
+#include <thread>
+#include <chrono>
+#include <cmath>
+
+
+double addition(double a, double b) {
+    return a + b;
+}
+
+
+double subtraction(double a, double b) {
+    return a - b;
+}
+
+
+double multiplication(double a, double b) {
+    return a * b;
+}
+
+
+double division(double a, double b) {
+    if (b != 0) {
+        return a / b;
+    } else {
+        std::cout << "Ошибка: делить на ноль не получится\n";
+        return NAN; 
+    }
+}
+
+
+double power(double base, double exponent) {
+    return std::pow(base, exponent);
+}
+
+
+double squareRoot(double num) {
+    if (num >= 0) {
+        return std::sqrt(num);
+    } else {
+        std::cout << "Ошибка: нельзя извлекать корень из отрицательного числа!\n";
+        return NAN;
+    }
+}
+
+
+double onePercent(double num) {
+    return num * 0.01;
+}
+
+
+int factorial(int n) {
+    if (n < 0) {
+        std::cout << "Ошибка: факториал отрицательного числа не определен\n";
+        return -1; 
+    } else if (n == 0 || n == 1) {
+        return 1;
+    } else {
+        return n * factorial(n - 1);
+    }
+}
+
+int main() {
+    std::cout << "by Maxim Tkhir. M.T\n";
+    std::this_thread::sleep_for(std::chrono::seconds(3));
+
+    int choice = 0; 
+    double num1, num2;
+
+    do {
+        std::cout << "Выберите операцию:\n";
+        std::cout << "1. Сложение\n2. Вычитание\n3. Умножение\n4. Деление\n";
+        std::cout << "5. Возведение в степень\n6. Квадратный корень\n7. 1 процент\n";
+        std::cout << "8. Факториал\n9. Выйти из программы\n";
+        std::cin >> choice;
+
+        if (choice >= 1 && choice <= 8) {
+            std::cout << "Введите два числа:\n";
+            std::cin >> num1 >> num2;
+        }
+
+        switch (choice) {
+            case 1:
+                std::cout << "Результат: " << addition(num1, num2) << "\n";
+                break;
+            case 2:
+                std::cout << "Результат: " << subtraction(num1, num2) << "\n";
+                break;
+            case 3:
+                std::cout << "Результат: " << multiplication(num1, num2) << "\n";
+                break;
+            case 4:
+                std::cout << "Результат: " << division(num1, num2) << "\n";
+                break;
+            case 5:
+                std::cout << "Результат: " << power(num1, num2) << "\n";
+                break;
+            case 6:
+                std::cout << "Результат: " << squareRoot(num1) << "\n";
+                break;
+            case 7:
+                std::cout << "Результат: " << onePercent(num1) << "\n";
+                break;
+            case 8:
+                std::cout << "Результат: " << factorial(static_cast<int>(num1)) << "\n";
+                break;
+            case 9:
+                std::cout << "Программа завершена.\n";
+                break;
+            default:
+                std::cout << "Неверный выбор. Повторите попытку.\n";
+        }
+
+    } while (choice != 9);
+
+    return 0;
+}
